@@ -1,9 +1,9 @@
 package todolist.Application.CreateTask;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 import todolist.Domain.Task;
 import todolist.Domain.TaskRepository;
+import todolist.Infrastructure.Persistence.InMemoryTaskRepository;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -14,7 +14,7 @@ public class CreateTaskTest {
 
   @Test
   public void shouldCreateTask() {
-    TaskRepository taskRepository = Mockito.mock(TaskRepository.class);
+    TaskRepository taskRepository = new InMemoryTaskRepository();
 
     CreateTask createTask = new CreateTask(taskRepository);
 
