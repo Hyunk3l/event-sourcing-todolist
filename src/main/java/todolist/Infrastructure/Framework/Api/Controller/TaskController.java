@@ -7,20 +7,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import todolist.Application.CreateTask.CreateTask;
+import todolist.Application.GetTasks.GetTasks;
 import todolist.Domain.Task;
 import todolist.Domain.TaskRepository;
-import todolist.Infrastructure.Persistence.InMemoryTaskRepository;
+
+import java.util.List;
 
 @RestController
+@RequestMapping(value = "/", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class TaskController {
 
-  @RequestMapping(value = "/tasks", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  private final TaskRepository inMemoryRepository;
+
+  public TaskController(TaskRepository inMemoryRepository) {
+    this.inMemoryRepository = inMemoryRepository;
+  }
+
+  @RequestMapping(value = "/tasks", method = RequestMethod.POST)
   public ResponseEntity<Task> postTask(
     @RequestBody CreateTaskRequestBody createTaskRequestBody
   ) {
-    TaskRepository taskRepository = new InMemoryTaskRepository();
-    Task task = new CreateTask(taskRepository)
+    Task task = new CreateTask(inMemoryRepository)
         .execute(createTaskRequestBody.getDescription());
     return ResponseEntity.ok(task);
+  }
+
+  @RequestMapping(value = "/tasks", method = RequestMethod.GET)
+  public ResponseEntity<List<Task>> getTasks() {
+    GetTasks getTasksUseCase = new GetTasks(inMemoryRepository);
+    return ResponseEntity.ok(getTasksUseCase.execute());
   }
 }

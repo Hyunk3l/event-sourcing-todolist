@@ -4,6 +4,7 @@ import todolist.Domain.Task;
 import todolist.Domain.TaskRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InMemoryTaskRepository implements TaskRepository {
   private final ArrayList<Task> taskList;
@@ -15,5 +16,10 @@ public class InMemoryTaskRepository implements TaskRepository {
   @Override
   public void persist(Task task) {
     taskList.add(task);
+  }
+
+  @Override
+  public List<Task> findAll() {
+    return taskList;
   }
 }
