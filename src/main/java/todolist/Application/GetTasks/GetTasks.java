@@ -13,7 +13,9 @@ public class GetTasks {
     this.taskRepository = taskRepository;
   }
 
-  public List<Task> execute() {
-    return taskRepository.findAll();
+  public List<GetTasksResponse> execute() {
+    List<Task> tasks = taskRepository.findAll();
+
+    return GetTasksResponse.buildFrom(tasks);
   }
 }

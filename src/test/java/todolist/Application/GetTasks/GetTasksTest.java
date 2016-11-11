@@ -18,9 +18,9 @@ public class GetTasksTest {
   @Test
   public void shouldReturnAnEmptyListOfTasks() {
     TaskRepository inMemoryTaskRepository = new InMemoryTaskRepository();
-    List<Task> taskList = new GetTasks(inMemoryTaskRepository).execute();
+    List<GetTasksResponse> getTasksResponseList = new GetTasks(inMemoryTaskRepository).execute();
 
-    assertTrue(taskList.isEmpty());
+    assertTrue(getTasksResponseList.isEmpty());
   }
 
   @Test
@@ -31,9 +31,9 @@ public class GetTasksTest {
         VALID_TASK_DESCRIPTION
     ));
 
-    List<Task> taskList = new GetTasks(inMemoryTaskRepository).execute();
+    List<GetTasksResponse> getTasksResponseList = new GetTasks(inMemoryTaskRepository).execute();
 
-    assertTrue(!taskList.isEmpty());
-    assertEquals(VALID_TASK_DESCRIPTION, taskList.get(0).getDescription());
+    assertTrue(!getTasksResponseList.isEmpty());
+    assertEquals(VALID_TASK_DESCRIPTION, getTasksResponseList.get(0).getDescription());
   }
 }

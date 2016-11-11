@@ -10,6 +10,7 @@ import todolist.Application.CreateTask.CreateTask;
 import todolist.Application.CreateTask.CreateTaskRequest;
 import todolist.Application.CreateTask.CreateTaskResponse;
 import todolist.Application.GetTasks.GetTasks;
+import todolist.Application.GetTasks.GetTasksResponse;
 import todolist.Domain.Task;
 import todolist.Domain.TaskRepository;
 
@@ -37,7 +38,7 @@ public class TaskController {
   }
 
   @RequestMapping(value = "/tasks", method = RequestMethod.GET)
-  public ResponseEntity<List<Task>> getTasks() {
+  public ResponseEntity<List<GetTasksResponse>> getTasks() {
     GetTasks getTasksUseCase = new GetTasks(inMemoryRepository);
     return ResponseEntity.ok(getTasksUseCase.execute());
   }
