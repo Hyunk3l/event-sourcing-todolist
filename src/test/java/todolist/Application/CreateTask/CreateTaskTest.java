@@ -18,9 +18,11 @@ public class CreateTaskTest {
 
     CreateTask createTask = new CreateTask(taskRepository);
 
-    Task createdTask = createTask.execute(VALID_TASK_DESCRIPTION);
+    CreateTaskResponse createdTaskResponse = createTask.execute(
+        new CreateTaskRequest(VALID_TASK_DESCRIPTION)
+    );
 
-    assertEquals(VALID_TASK_DESCRIPTION, createdTask.getDescription());
-    assertTrue(createdTask.getId() != null);
+    assertEquals(VALID_TASK_DESCRIPTION, createdTaskResponse.getDescription());
+    assertTrue(createdTaskResponse.getId() != null);
   }
 }

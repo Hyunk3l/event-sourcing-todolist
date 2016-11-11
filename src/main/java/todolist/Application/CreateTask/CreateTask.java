@@ -13,14 +13,17 @@ public class CreateTask {
     this.taskRepository = taskRepository;
   }
 
-  public Task execute(String description) {
+  public CreateTaskResponse execute(CreateTaskRequest createTaskRequest) {
 
     Task createdTask = new Task(
         UUID.randomUUID(),
-        description
+        createTaskRequest.getDescription()
     );
     this.taskRepository.persist(createdTask);
 
-    return createdTask;
+    return new CreateTaskResponse(
+        createdTask.getId().toString(),
+        createdTask.getDescription()
+    );
   }
 }

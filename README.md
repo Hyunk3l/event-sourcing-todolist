@@ -2,6 +2,11 @@
 
 ## How to use
 
+### Run the application
+To boot the application, just run this command in a terminal:
+```
+./gradlew clean bootRun
+```
 
 ### Create a task
 
