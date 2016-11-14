@@ -3,7 +3,17 @@
 ## How to use
 
 ### Run the application
-To boot the application, just run this command in a terminal:
+To boot the application, you can run it using docker-compose:
+```
+docker-compose up --build
+```
+
+Alternatively you can run it using Dockerfile:
+```
+doker build -t todolist . && docker run -p 8000:8000 todolist
+```
+
+or just using gradlew:
 ```
 ./gradlew clean bootRun
 ```
