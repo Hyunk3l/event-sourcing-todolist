@@ -71,5 +71,6 @@ public class Task {
 
   public void apply(UpdatedDescriptionEvent updatedDescriptionEvent) {
     this.description = updatedDescriptionEvent.getDescription();
+    this.modifiedAt = Instant.now();
   }
 }

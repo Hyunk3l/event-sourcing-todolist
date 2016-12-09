@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TaskTest {
@@ -35,7 +36,11 @@ public class TaskTest {
   @Test
   public void itShouldUpdateDescription() throws Exception {
     Task task = Task.create(UUID.randomUUID(), "Any valid description.");
+
+    Instant oldModifiedAt = task.getModifiedAt();
     task.updateDescription("Another valid description.");
+
     assertThat(task.getDescription(), is("Another valid description."));
+    assertThat(task.getModifiedAt(), not(oldModifiedAt));
   }
 }
