@@ -7,10 +7,9 @@ import todolist.Domain.Events.UpdatedDescriptionEvent;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Task {
-  private UUID id;
+  private TaskId id;
   private String description;
   private Instant createdAt;
   private Instant modifiedAt;
@@ -19,9 +18,9 @@ public class Task {
   private Task() {
   }
 
-  public static Task create(UUID id, String description) {
+  public static Task create(TaskId id, String description) {
     Task task = new Task();
-    task.publish(new TaskCreatedEvent(id.toString(), description, Instant.now(), Instant.now()));
+    task.publish(new TaskCreatedEvent(id, description, Instant.now(), Instant.now()));
     return task;
   }
 
@@ -34,7 +33,7 @@ public class Task {
     apply(event);
   }
 
-  public UUID getId() {
+  public TaskId getId() {
     return id;
   }
 
@@ -63,7 +62,7 @@ public class Task {
   }
 
   public void apply(TaskCreatedEvent taskCreatedEvent) {
-    this.id = UUID.fromString(taskCreatedEvent.getId());
+    this.id = taskCreatedEvent.getId();
     this.description = taskCreatedEvent.getDescription();
     this.createdAt = taskCreatedEvent.getCreatedAt();
     this.modifiedAt = taskCreatedEvent.getModifiedAt();

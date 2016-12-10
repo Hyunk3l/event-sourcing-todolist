@@ -2,6 +2,7 @@ package todolist.Application.GetTasks;
 
 import org.junit.Test;
 import todolist.Domain.Task;
+import todolist.Domain.TaskId;
 import todolist.Domain.TaskRepository;
 import todolist.Infrastructure.Persistence.InMemoryTaskRepository;
 
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class GetTasksTest {
 
   private static final String VALID_TASK_DESCRIPTION = "Just a task";
+  private static final TaskId VALID_ID = new TaskId();
 
   @Test
   public void shouldReturnAnEmptyListOfTasks() {
@@ -27,7 +29,7 @@ public class GetTasksTest {
   public void shouldReturnAListOfTasks() {
     TaskRepository inMemoryTaskRepository = new InMemoryTaskRepository();
     inMemoryTaskRepository.persist(Task.create(
-        UUID.randomUUID(),
+        VALID_ID,
         VALID_TASK_DESCRIPTION
     ));
 

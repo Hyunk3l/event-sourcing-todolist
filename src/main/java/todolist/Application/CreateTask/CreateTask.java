@@ -1,6 +1,7 @@
 package todolist.Application.CreateTask;
 
 import todolist.Domain.Task;
+import todolist.Domain.TaskId;
 import todolist.Domain.TaskRepository;
 
 import java.util.UUID;
@@ -16,7 +17,7 @@ public class CreateTask {
   public CreateTaskResponse execute(CreateTaskRequest createTaskRequest) {
 
     Task createdTask = Task.create(
-        UUID.randomUUID(),
+        new TaskId(),
         createTaskRequest.getDescription()
     );
     this.taskRepository.persist(createdTask);
