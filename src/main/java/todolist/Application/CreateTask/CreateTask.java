@@ -15,7 +15,7 @@ public class CreateTask {
 
   public CreateTaskResponse execute(CreateTaskRequest createTaskRequest) {
 
-    Task createdTask = new Task(
+    Task createdTask = Task.create(
         UUID.randomUUID(),
         createTaskRequest.getDescription()
     );

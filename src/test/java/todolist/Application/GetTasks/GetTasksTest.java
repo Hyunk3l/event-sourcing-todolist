@@ -26,7 +26,7 @@ public class GetTasksTest {
   @Test
   public void shouldReturnAListOfTasks() {
     TaskRepository inMemoryTaskRepository = new InMemoryTaskRepository();
-    inMemoryTaskRepository.persist(new Task(
+    inMemoryTaskRepository.persist(Task.create(
         UUID.randomUUID(),
         VALID_TASK_DESCRIPTION
     ));
